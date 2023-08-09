@@ -1,13 +1,19 @@
 package com.profectum.desafio.dto.Perfil;
 
-public class CriarPerfilDto {
-	private String name;
+import com.profectum.desafio.models.Perfil;
 
-	public String getName() {
-		return name;
+public class CriarPerfilDto {
+	private String nome;
+	
+	public Perfil transform() {
+		return new Perfil(nome);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getnome() {
+		return nome;
+	}
+
+	public void setnome(String nome) {
+		this.nome = nome;
 	}
 }

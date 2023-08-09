@@ -22,9 +22,17 @@ public class PerfilController {
 	@Autowired 
 	ListarPerfilPorId listarPerfilPorIdService;
 	
+	@Autowired
+	ListarPerfis listarPerfisService;
+	
+	@GetMapping("/perfis")
+	@public List<Perfil> findAll(){
+		return listarPerfisService.execute();
+	}
+	
 	@PostMapping("/perfil")
-	public void add(@RequestBody CriarPerfilDto dto) {
-		criarPerfilService.execute(dto);
+	public Perfil add(@RequestBody CriarPerfilDto dto) {
+		return criarPerfilService.execute(dto);
 	}
 	
 	@GetMapping("/perfil/{id}")

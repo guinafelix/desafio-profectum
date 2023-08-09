@@ -19,6 +19,10 @@ public class Perfil implements Serializable{
 	
 	private String nome;
 
+	public Perfil(String nome) {
+		this.nome = nome;
+	}
+
 	public long getId() {
 		return id;
 	}

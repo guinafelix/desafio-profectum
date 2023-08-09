@@ -6,6 +6,5 @@ import com.profectum.desafio.dto.Perfil.CriarPerfilDto;
 import com.profectum.desafio.models.Perfil;
 
 public interface PerfilRepository extends JpaRepository<Perfil, Long>{
-	Perfil add(CriarPerfilDto dto);
 	Perfil findById(long id);
 }
