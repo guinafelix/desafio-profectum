@@ -24,6 +24,9 @@ public class DisciplinaController {
 	@Autowired
 	ListarDisciplinas listarDisciplinasService;
 	
+	@Autowired
+	ListarDisciplinaPorId listarDisciplinaPorId;
+	
 	@PostMapping("/disciplina")
 	public Disciplina add(@RequestBody CriarDisciplinaDto dto) {
 		return criarDisciplinaService.execute(dto);
@@ -36,7 +39,7 @@ public class DisciplinaController {
 	
 	@GetMapping("/disciplina/{id}")
 	public Disciplina findById(@PathVariable(value = "id")	long id) {
-		
+		return listarDisciplinaPorId.execute(id);
 	}
 	
 }
