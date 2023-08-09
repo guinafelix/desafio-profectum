@@ -1,5 +1,7 @@
 package com.profectum.desafio.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import com.profectum.desafio.dto.Perfil.CriarPerfilDto;
 import com.profectum.desafio.models.Perfil;
 import com.profectum.desafio.services.perfis.CriarPerfil;
 import com.profectum.desafio.services.perfis.ListarPerfilPorId;
+import com.profectum.desafio.services.perfis.ListarPerfis;
 
 @RestController
 @RequestMapping(value="/api")
@@ -26,7 +29,7 @@ public class PerfilController {
 	ListarPerfis listarPerfisService;
 	
 	@GetMapping("/perfis")
-	@public List<Perfil> findAll(){
+	public List<Perfil> findAll(){
 		return listarPerfisService.execute();
 	}
 	

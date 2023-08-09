@@ -19,7 +19,7 @@ public class Oferta implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private String semestre;
+	private int semestre;
 
     @ManyToOne
     @JoinColumn(name = "tb_disciplina_id")
@@ -29,6 +29,13 @@ public class Oferta implements Serializable{
     @JoinColumn(name = "tb_curso_id")
     private Curso curso;
 
+	public Oferta(Curso curso, Disciplina disciplina, int semestre) {
+		super();
+		this.curso = curso;
+		this.disciplina = disciplina;
+		this.semestre = semestre;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -37,11 +44,11 @@ public class Oferta implements Serializable{
 		this.id = id;
 	}
 
-	public String getSemestre() {
+	public int getSemestre() {
 		return semestre;
 	}
 
-	public void setSemestre(String semestre) {
+	public void setSemestre(int semestre) {
 		this.semestre = semestre;
 	}
 

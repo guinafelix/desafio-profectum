@@ -3,7 +3,10 @@ package com.profectum.desafio.models;
 import java.io.Serializable;
 import java.util.List;
 
+import com.profectum.desafio.dto.Curso.CriarCursoDto;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,8 +26,15 @@ public class Curso implements Serializable{
 	
 	private int duracaoEmSemestres;
 	
-	@OneToMany(mappedBy = "curso")
+	@OneToMany(mappedBy = "curso", fetch = FetchType.EAGER)
     private List<Oferta> ofertas;
+	
+	public Curso(CriarCursoDto dto, List<Oferta> ofertas) {
+		super();
+		this.nome = dto.getNome();
+		this.duracaoEmSemestres = dto.getDuracaoEmSemetres();
+		this.ofertas = ofertas;
+	}
 
 	public long getId() {
 		return id;

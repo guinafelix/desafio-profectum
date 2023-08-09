@@ -9,6 +9,7 @@ public class CriarCursoDto {
 	private int duracaoEmSemetres;
 	private List<CriarOfertaDto> criarOfertasDto;
 	
+	
 	public String getNome() {
 		return nome;
 	}
