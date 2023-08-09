@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.profectum.desafio.dto.Curso.CriarCursoDto;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Curso implements Serializable{
 	
 	private int duracaoEmSemestres;
 	
-	@OneToMany(mappedBy = "curso", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "curso", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Oferta> ofertas;
 	
 	public Curso(CriarCursoDto dto, List<Oferta> ofertas) {
