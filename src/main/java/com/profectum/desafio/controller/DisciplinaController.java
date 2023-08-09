@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.profectum.desafio.dto.Disciplina.CriarDisciplinaDto;
 import com.profectum.desafio.models.Disciplina;
 import com.profectum.desafio.services.disciplinas.CriarDisciplina;
+import com.profectum.desafio.services.disciplinas.ListarDisciplinaPorId;
 import com.profectum.desafio.services.disciplinas.ListarDisciplinas;
 
 @RestController
