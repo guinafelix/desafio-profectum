@@ -1,13 +1,15 @@
 package com.profectum.desafio.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,18 +23,19 @@ public class Oferta implements Serializable{
 	
 	private int semestre;
 
-    @ManyToOne
-    @JoinColumn(name = "tb_disciplina_id")
-    private Disciplina disciplina;
+    
+	@ManyToMany
+    @JoinTable(
+        name = "oferta_disciplina",
+        joinColumns = @JoinColumn(name = "oferta_id"),
+        inverseJoinColumns = @JoinColumn(name = "disciplina_id")
+    )
+    private List<Disciplina> disciplinas;
 
-    @ManyToOne
-    @JoinColumn(name = "tb_curso_id")
-    private Curso curso;
-
-	public Oferta(Curso curso, Disciplina disciplina, int semestre) {
+    
+	public Oferta(List<Disciplina> disciplinas, int semestre) {
 		super();
-		this.curso = curso;
-		this.disciplina = disciplina;
+		this.disciplinas = disciplinas;
 		this.semestre = semestre;
 	}
 
@@ -52,19 +55,11 @@ public class Oferta implements Serializable{
 		this.semestre = semestre;
 	}
 
-	public Disciplina getDisciplina() {
-		return disciplina;
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
 
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
-	}
-
-	public Curso getCurso() {
-		return curso;
-	}
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 }

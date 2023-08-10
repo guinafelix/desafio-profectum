@@ -1,10 +1,13 @@
 package com.profectum.desafio.services.ofertas;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.profectum.desafio.dto.Oferta.CriarOfertaDto;
-import com.profectum.desafio.models.Curso;
 import com.profectum.desafio.models.Disciplina;
 import com.profectum.desafio.models.Oferta;
 import com.profectum.desafio.repository.CursoRepository;
@@ -23,11 +26,15 @@ public class CriarOferta {
 	CursoRepository cursoRepository;
 	
 	public Oferta execute(CriarOfertaDto dto) {
-		Curso curso = cursoRepository.findById(dto.getCursoId());
+		List<Long> disciplinasId = dto.getDisciplinasId();
+
+		List<Disciplina> disciplinas = disciplinasId.stream()
+                .map(disciplinaId -> disciplinaRepository.findById(disciplinaId))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
 		
-		Disciplina disciplina = disciplinaRepository.findById(dto.getDisciplinaId());
-		
-		Oferta oferta = new Oferta(curso, disciplina, dto.getSemestre());
+		Oferta oferta = new Oferta(disciplinas, dto.getSemestre());
 		
 		return ofertaRepository.save(oferta);
 	}
