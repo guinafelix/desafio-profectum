@@ -19,6 +19,7 @@ import com.profectum.desafio.services.cursos.ListarCursos;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
@@ -37,7 +38,7 @@ public class CursoController {
 	@PostMapping("/curso")
 	@Operation(summary = "Cria um curso.", method = "POST")
 	@ApiResponse(responseCode = "201")
-	public ResponseEntity<Void> add(@RequestBody() CriarCursoDto dto) {
+	public ResponseEntity<Void> add(@RequestBody() @Valid CriarCursoDto dto) {
 		try {
 			criarCursoService.execute(dto);
 			return new ResponseEntity<>(HttpStatus.CREATED);

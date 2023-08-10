@@ -113,14 +113,9 @@ public class Usuario implements Serializable, UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (this.perfil.getNome() == "admin") return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+		System.out.println("oie");
+		if ("admin".equals(this.perfil.getNome())) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
 		else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -146,6 +141,12 @@ public class Usuario implements Serializable, UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return senha;
 	}
 	
 	

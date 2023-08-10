@@ -7,14 +7,15 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.profectum.desafio.models.Usuario;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-@Service
+@Component
 public class JwtTokenService {
+	
     @Value("${api.security.token.secret}")
     private String secret;
 

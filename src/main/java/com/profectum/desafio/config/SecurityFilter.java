@@ -18,25 +18,26 @@ import java.io.IOException;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
-    JwtTokenService JwtTokenService;
+    JwtTokenService jwtTokenService;
+    
     @Autowired
     UsuarioRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var token = this.recoverToken(request);
+        String token = this.recoverToken(request);
         if(token != null){
-            var login = JwtTokenService.validateToken(token);
+            String login = jwtTokenService.validateToken(token);
             UserDetails user = userRepository.findByNome(login);
 
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request){
-        var authHeader = request.getHeader("Authorization");
+        String authHeader = request.getHeader("Authorization");
         if(authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
     }

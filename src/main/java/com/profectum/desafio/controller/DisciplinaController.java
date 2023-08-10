@@ -19,6 +19,7 @@ import com.profectum.desafio.services.disciplinas.ListarDisciplinas;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value="/api")
@@ -37,7 +38,7 @@ public class DisciplinaController {
 	@PostMapping("/disciplina")
 	@Operation(summary = "Cria uma disciplina", method = "POST")
 	@ApiResponse(responseCode = "201")
-	public Disciplina add(@RequestBody CriarDisciplinaDto dto) {
+	public Disciplina add(@RequestBody  @Valid CriarDisciplinaDto dto) {
 		return criarDisciplinaService.execute(dto);
 	}
 	
@@ -49,7 +50,7 @@ public class DisciplinaController {
 	}
 	
 	@GetMapping("/disciplina/{id}")
-	@Operation(summary = "Lista uma disciplina pelo seu id.", method = "POST")
+	@Operation(summary = "Lista uma disciplina pelo seu id.", method = "GET")
 	@ApiResponse(responseCode = "200")
 	public Disciplina findById(@PathVariable(value = "id")	long id) {
 		return listarDisciplinaPorId.execute(id);

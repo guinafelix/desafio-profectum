@@ -21,6 +21,7 @@ import com.profectum.desafio.services.perfis.ListarPerfis;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value="/api", produces = {"application/json"})
@@ -49,7 +50,7 @@ public class PerfilController {
 	@PostMapping("/perfil")
 	@ApiResponse(responseCode = "201")
 	@Operation(summary = "Cria um perfil de usário.", method = "POST")
-	public ResponseEntity<Void> add(@RequestBody CriarPerfilDto dto) {
+	public ResponseEntity<Void> add(@RequestBody @Valid CriarPerfilDto dto) {
 		try {
 			criarPerfilService.execute(dto);
 			return new ResponseEntity<>(HttpStatus.CREATED);

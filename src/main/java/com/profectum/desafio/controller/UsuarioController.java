@@ -19,6 +19,7 @@ import com.profectum.desafio.services.usuarios.ListarUsuarios;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 import com.profectum.desafio.services.usuarios.CriarUsuario; 
 
@@ -49,7 +50,7 @@ public class UsuarioController {
 	@PostMapping("/usuario")
 	@Operation(summary = "Cria um usuário", method = "POST")
 	@ApiResponse(responseCode = "201")
-	public ResponseEntity<Void> add(@RequestBody CriarUsuarioDto dto) {
+	public ResponseEntity<Void> add(@RequestBody @Valid CriarUsuarioDto dto) {
 		try {
 			criarUsuarioService.execute(dto);
 			return new ResponseEntity<>(HttpStatus.CREATED);

@@ -2,8 +2,10 @@ package com.profectum.desafio.dto.Auth;
 
 
 public class LoginDto {
+	
 	private String nome;
 	private String senha;
+	
 	public String getNome() {
 		return nome;
 	}
