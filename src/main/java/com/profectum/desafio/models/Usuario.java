@@ -28,17 +28,20 @@ public class Usuario implements Serializable{
 	
 	private String matricula;
 	
+	private String senha;
+	
 	@ManyToOne(targetEntity = Perfil.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="perfil_id")
 	private Perfil perfil;
 	
 	
-	public Usuario(String nome, Curso curso, String matricula, Perfil perfil) {
+	public Usuario(String nome, Curso curso, String matricula, Perfil perfil, String senha) {
 		super();
 		this.nome = nome;
 		this.curso = curso;
 		this.matricula = matricula;
 		this.perfil = perfil;
+		this.senha = senha;
 	}
 	
 	public Usuario() {
@@ -90,7 +93,17 @@ public class Usuario implements Serializable{
 	}
 
 
-	public void setPerfis(Perfil perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
 }
