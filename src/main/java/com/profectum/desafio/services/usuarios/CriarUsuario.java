@@ -34,7 +34,7 @@ public class CriarUsuario {
 		
 		Optional<Perfil> perfil = perfilRepository.findById(dto.getPerfilId());
 
-		Usuario user = new Usuario(dto.getNome(), curso.orElse(null), matricula.orElse(null), perfil.get());
+		Usuario user = new Usuario(dto.getNome(), curso.orElse(null), matricula.orElse(null), perfil.get(), dto.getSenha());
 		return usuarioRepository.save(user);
 	}
 	

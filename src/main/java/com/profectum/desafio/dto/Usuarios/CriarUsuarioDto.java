@@ -7,6 +7,7 @@ public class CriarUsuarioDto {
 	private long perfilId;
 	private Optional<String> matricula;
 	private Optional<Long> cursoId;
+	private String senha;
 	
 	
 	public String getNome() {
@@ -33,6 +34,10 @@ public class CriarUsuarioDto {
 	public void setCursoId(Long cursoId) {
 		this.cursoId = Optional.ofNullable(cursoId);
 	}
-	
-	
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 }
