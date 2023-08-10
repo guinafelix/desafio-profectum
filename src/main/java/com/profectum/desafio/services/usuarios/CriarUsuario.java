@@ -1,8 +1,6 @@
 package com.profectum.desafio.services.usuarios;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,16 +30,10 @@ public class CriarUsuario {
 			return null;
 		}
 		
-		List<Long> perfilIds = dto.getPerfilId();
-
-		List<Perfil> perfis = perfilIds.stream()
-                .map(perfilId -> perfilRepository.findById(perfilId))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+		Optional<Perfil> perfil = perfilRepository.findById(dto.getPerfilId());
 
 		
-		Usuario user = new Usuario(dto.getNome(), curso,dto.getMatricula(), perfis);
+		Usuario user = new Usuario(dto.getNome(), curso,dto.getMatricula(), perfil.get());
 		return user;
 	}
 	

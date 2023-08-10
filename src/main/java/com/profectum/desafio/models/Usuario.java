@@ -1,7 +1,6 @@
 package com.profectum.desafio.models;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 import jakarta.persistence.CascadeType;
@@ -12,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,29 +29,28 @@ public class Usuario implements Serializable{
 	
 	private String matricula;
 	
+	@ManyToOne(targetEntity = Perfil.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="perfil_id")
+	private Perfil perfil;
 	
-	public Usuario(String nome, Curso curso, String matricula, List<Perfil> perfis) {
+	
+	public Usuario(String nome, Curso curso, String matricula, Perfil perfil) {
 		super();
 		this.nome = nome;
 		this.curso = curso;
 		this.matricula = matricula;
-		this.perfis = perfis;
+		this.perfil = perfil;
 	}
-
-
-	public Usuario(String nome, Optional<Curso> curso, String matricula, List<Perfil> perfis) {
+	
+	
+	public Usuario(String nome, Optional<Curso> curso, String matricula, Perfil perfil) {
 		super();
 		this.nome = nome;
 		this.curso = curso != null ? curso.get() : null;
 		this.matricula = matricula;
-		this.perfis = perfis;
+		this.perfil = perfil;
 	}
-
-
-	@OneToMany(targetEntity = Perfil.class, fetch=FetchType.EAGER)
-	@JoinColumn(name="perfil_id")
-	private List<Perfil> perfis;
-
+	
 
 	public long getId() {
 		return id;
@@ -95,12 +92,12 @@ public class Usuario implements Serializable{
 	}
 
 
-	public List<Perfil> getPerfis() {
-		return perfis;
+	public Perfil getPerfil() {
+		return perfil;
 	}
 
 
-	public void setPerfis(List<Perfil> perfis) {
-		this.perfis = perfis;
+	public void setPerfis(Perfil perfil) {
+		this.perfil = perfil;
 	}
 }

@@ -36,6 +36,12 @@ public class Curso implements Serializable{
 		this.duracaoEmSemestres = dto.getDuracaoEmSemetres();
 		this.ofertas = ofertas;
 	}
+	
+	public Curso(CriarCursoDto dto) {
+		super();
+		this.nome = dto.getNome();
+		this.duracaoEmSemestres = dto.getDuracaoEmSemetres();
+	}
 
 	public long getId() {
 		return id;

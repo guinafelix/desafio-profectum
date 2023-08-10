@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,11 +33,16 @@ public class Oferta implements Serializable{
     )
     private List<Disciplina> disciplinas;
 
+	
+	@ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
     
-	public Oferta(List<Disciplina> disciplinas, int semestre) {
+	public Oferta(Curso curso, List<Disciplina> disciplinas, int semestre) {
 		super();
 		this.disciplinas = disciplinas;
 		this.semestre = semestre;
+		this.curso = curso;
 	}
 
 	public long getId() {

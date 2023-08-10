@@ -22,14 +22,17 @@ public class CriarCurso {
 	CriarOferta criarOfertaService;
 	
 	public Curso execute(CriarCursoDto dto) {
+		Curso curso = new Curso(dto);
+		
 		List<Oferta> ofertas = new ArrayList<>();
 
 		for (CriarOfertaDto criarOfertaDto : dto.getCriarOfertasDto()) {
+			criarOfertaDto.setCurso(curso);
 		    Oferta oferta = criarOfertaService.execute(criarOfertaDto); 
 		    ofertas.add(oferta);
 		}
 		
-		Curso curso = new Curso(dto, ofertas);
+		curso.setOfertas(ofertas);
 		
 		return cursoRepository.save(curso);
 	}

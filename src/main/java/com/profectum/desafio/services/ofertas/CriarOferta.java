@@ -34,7 +34,7 @@ public class CriarOferta {
                 .map(Optional::get)
                 .collect(Collectors.toList());
 		
-		Oferta oferta = new Oferta(disciplinas, dto.getSemestre());
+		Oferta oferta = new Oferta(dto.getCurso(), disciplinas, dto.getSemestre());
 		
 		return ofertaRepository.save(oferta);
 	}

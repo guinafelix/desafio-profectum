@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CriarUsuarioDto {
 	private String nome;
-	private List<Long> perfilId;
+	private long perfilId;
 	private String matricula;
 	private long cursoId;
 	
@@ -15,10 +15,10 @@ public class CriarUsuarioDto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public List<Long> getPerfilId() {
+	public Long getPerfilId() {
 		return perfilId;
 	}
-	public void setPerfilId(List<Long> perfilId) {
+	public void setPerfilId(Long perfilId) {
 		this.perfilId = perfilId;
 	}
 	public String getMatricula() {
