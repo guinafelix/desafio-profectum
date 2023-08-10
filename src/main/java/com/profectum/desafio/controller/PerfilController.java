@@ -15,9 +15,11 @@ import com.profectum.desafio.models.Perfil;
 import com.profectum.desafio.services.perfis.CriarPerfil;
 import com.profectum.desafio.services.perfis.ListarPerfilPorId;
 import com.profectum.desafio.services.perfis.ListarPerfis;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value="/api", produces = {"application/json"})
+@Tag(name = "Perfil")
 public class PerfilController {
 	@Autowired
 	CriarPerfil criarPerfilService;

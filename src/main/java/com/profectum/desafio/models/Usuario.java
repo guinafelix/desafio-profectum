@@ -1,7 +1,6 @@
 package com.profectum.desafio.models;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -45,15 +44,6 @@ public class Usuario implements Serializable{
 	public Usuario() {
 		super();
 	}
-	
-	public Usuario(String nome, Optional<Curso> curso, String matricula, Perfil perfil) {
-		super();
-		this.nome = nome;
-		this.curso = curso != null ? curso.get() : null;
-		this.matricula = matricula;
-		this.perfil = perfil;
-	}
-	
 
 	public long getId() {
 		return id;

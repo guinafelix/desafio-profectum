@@ -1,12 +1,12 @@
 package com.profectum.desafio.dto.Usuarios;
 
-import java.util.List;
+import java.util.Optional;
 
 public class CriarUsuarioDto {
 	private String nome;
 	private long perfilId;
-	private String matricula;
-	private long cursoId;
+	private Optional<String> matricula;
+	private Optional<Long> cursoId;
 	
 	
 	public String getNome() {
@@ -21,17 +21,17 @@ public class CriarUsuarioDto {
 	public void setPerfilId(Long perfilId) {
 		this.perfilId = perfilId;
 	}
-	public String getMatricula() {
+	public Optional<String> getMatricula() {
 		return matricula;
 	}
 	public void setMatricula(String matricula) {
-		this.matricula = matricula;
+		this.matricula = Optional.ofNullable(matricula);
 	}
-	public Long getCursoId() {
+	public Optional<Long> getCursoId() {
 		return cursoId;
 	}
 	public void setCursoId(Long cursoId) {
-		this.cursoId = cursoId;
+		this.cursoId = Optional.ofNullable(cursoId);
 	}
 	
 	

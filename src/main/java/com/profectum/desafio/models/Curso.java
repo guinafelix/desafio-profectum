@@ -33,14 +33,14 @@ public class Curso implements Serializable{
 	public Curso(CriarCursoDto dto, List<Oferta> ofertas) {
 		super();
 		this.nome = dto.getNome();
-		this.duracaoEmSemestres = dto.getDuracaoEmSemetres();
+		this.duracaoEmSemestres = dto.getDuracaoEmSemestres();
 		this.ofertas = ofertas;
 	}
 	
 	public Curso(CriarCursoDto dto) {
 		super();
 		this.nome = dto.getNome();
-		this.duracaoEmSemestres = dto.getDuracaoEmSemetres();
+		this.duracaoEmSemestres = dto.getDuracaoEmSemestres();
 	}
 
 	public Curso() {

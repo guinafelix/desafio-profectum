@@ -6,8 +6,8 @@ import com.profectum.desafio.dto.Oferta.CriarOfertaDto;
 
 public class CriarCursoDto {
 	private String nome;
-	private int duracaoEmSemetres;
-	private List<CriarOfertaDto> criarOfertasDto;
+	private int duracaoEmSemestres;
+	private List<CriarOfertaDto> ofertas;
 	
 	
 	public String getNome() {
@@ -16,16 +16,16 @@ public class CriarCursoDto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getDuracaoEmSemetres() {
-		return duracaoEmSemetres;
+	public int getDuracaoEmSemestres() {
+		return duracaoEmSemestres;
 	}
-	public void setDuracaoEmSemetres(int duracaoEmSemetres) {
-		this.duracaoEmSemetres = duracaoEmSemetres;
+	public void setDuracaoEmSemestres(int duracaoEmSemestres) {
+		this.duracaoEmSemestres = duracaoEmSemestres;
 	}
-	public List<CriarOfertaDto> getCriarOfertasDto() {
-		return criarOfertasDto;
+	public List<CriarOfertaDto> getofertas() {
+		return ofertas;
 	}
-	public void setCriarOfertasDto(List<CriarOfertaDto> criarOfertasDto) {
-		this.criarOfertasDto = criarOfertasDto;
+	public void setofertas(List<CriarOfertaDto> ofertas) {
+		this.ofertas = ofertas;
 	}
 }

@@ -25,15 +25,18 @@ public class CriarCurso {
 		Curso curso = new Curso(dto);
 		
 		List<Oferta> ofertas = new ArrayList<>();
+		
+		List<CriarOfertaDto> listaDeOfertas = dto.getofertas();
+		
+		Curso savedCurso = cursoRepository.save(curso);
 
-		for (CriarOfertaDto criarOfertaDto : dto.getCriarOfertasDto()) {
-			criarOfertaDto.setCurso(curso);
-		    Oferta oferta = criarOfertaService.execute(criarOfertaDto); 
+		for (CriarOfertaDto criarOfertaDto : listaDeOfertas) {
+		    Oferta oferta = criarOfertaService.execute(criarOfertaDto, savedCurso); 
 		    ofertas.add(oferta);
 		}
 		
-		curso.setOfertas(ofertas);
+		savedCurso.setOfertas(ofertas);
 		
-		return cursoRepository.save(curso);
+		return cursoRepository.save(savedCurso);
 	}
 }

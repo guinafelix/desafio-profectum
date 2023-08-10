@@ -24,17 +24,18 @@ public class CriarUsuario {
 	PerfilRepository perfilRepository;
 	
 	public Usuario execute(CriarUsuarioDto dto) {
-		Optional<Curso> curso = cursoRepository.findById(dto.getCursoId());
+		Optional<Curso> curso = Optional.empty();
 		
-		if (curso == null) {
-			return null;
+		Optional<String> matricula = dto.getMatricula() != null ? Optional.ofNullable(dto.getMatricula().get()) : Optional.empty();
+		
+		if (dto.getCursoId() != null && dto.getCursoId().isPresent()) {
+			curso = cursoRepository.findById(dto.getCursoId().get());
 		}
 		
 		Optional<Perfil> perfil = perfilRepository.findById(dto.getPerfilId());
 
-		
-		Usuario user = new Usuario(dto.getNome(), curso,dto.getMatricula(), perfil.get());
-		return user;
+		Usuario user = new Usuario(dto.getNome(), curso.orElse(null), matricula.orElse(null), perfil.get());
+		return usuarioRepository.save(user);
 	}
 	
 }
