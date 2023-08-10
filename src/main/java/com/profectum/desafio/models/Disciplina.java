@@ -29,6 +29,12 @@ public class Disciplina implements Serializable{
 		this.nome = nome;
 	}
 
+	public Disciplina() {
+		super();
+	}
+
+
+
 	public long getId() {
 		return id;
 	}

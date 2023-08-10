@@ -42,6 +42,9 @@ public class Usuario implements Serializable{
 		this.perfil = perfil;
 	}
 	
+	public Usuario() {
+		super();
+	}
 	
 	public Usuario(String nome, Optional<Curso> curso, String matricula, Perfil perfil) {
 		super();

@@ -23,7 +23,6 @@ public class Oferta implements Serializable{
 	private long id;
 	
 	private int semestre;
-
     
 	@ManyToMany
     @JoinTable(
@@ -43,6 +42,10 @@ public class Oferta implements Serializable{
 		this.disciplinas = disciplinas;
 		this.semestre = semestre;
 		this.curso = curso;
+	}
+
+	public Oferta() {
+		super();
 	}
 
 	public long getId() {
