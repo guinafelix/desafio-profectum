@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -103,6 +105,7 @@ public class Usuario implements Serializable, UserDetails{
 		this.perfil = perfil;
 	}
 
+	 @JsonIgnore
 	public String getSenha() {
 		return senha;
 	}
@@ -113,7 +116,6 @@ public class Usuario implements Serializable, UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		System.out.println("oie");
 		if ("admin".equals(this.perfil.getNome())) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
 		else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	}
@@ -146,7 +148,7 @@ public class Usuario implements Serializable, UserDetails{
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return senha;
+		return null;
 	}
 	
 	

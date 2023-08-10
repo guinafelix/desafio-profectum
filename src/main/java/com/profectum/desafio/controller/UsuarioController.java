@@ -2,11 +2,13 @@ package com.profectum.desafio.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
-import com.profectum.desafio.services.usuarios.CriarUsuario; 
+import com.profectum.desafio.services.usuarios.CriarUsuario;
+import com.profectum.desafio.services.usuarios.ListarUsuarioPorId; 
 
 
 @RestController
@@ -35,6 +38,8 @@ public class UsuarioController {
 	@Autowired 
 	CriarUsuario criarUsuarioService;
 	
+	@Autowired
+	ListarUsuarioPorId listarUsuarioPorId;
 	
 	@GetMapping("/usuarios")
 	@Operation(summary = "Lista todos os usuários", method = "GET")
@@ -42,6 +47,17 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>> findAll() {
 		try {
 			return ResponseEntity.ok(listarUsuariosService.execute());	
+		}catch (Error err) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/usuario/{id}")
+	@Operation(summary = "Lista um usuário pelo seu id.", method = "GET")
+	@ApiResponse(responseCode = "200")
+	public ResponseEntity<Optional<Usuario>> findbyId(@PathVariable(value = "id")	long id) {
+		try {
+			return listarUsuarioPorId.execute(id);	
 		}catch (Error err) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
