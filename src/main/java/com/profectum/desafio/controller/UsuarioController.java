@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import jakarta.validation.Valid;
 
 import com.profectum.desafio.services.usuarios.CriarUsuario;
 import com.profectum.desafio.services.usuarios.EditarUsuario;
+import com.profectum.desafio.services.usuarios.ExcluirUsuario;
 import com.profectum.desafio.services.usuarios.ListarUsuarioPorId; 
 
 
@@ -46,6 +48,9 @@ public class UsuarioController {
 	
 	@Autowired
 	EditarUsuario editarUsuarioService;
+	
+	@Autowired
+	ExcluirUsuario excluirUsuarioService;
 	
 	@GetMapping("/usuarios")
 	@Operation(summary = "Lista todos os usuários", method = "GET")
@@ -85,9 +90,22 @@ public class UsuarioController {
 	@PatchMapping("/usuario/{id}")
 	@Operation(summary = "edita um usuário", method = "PATCH")
 	@ApiResponse(responseCode = "201")
-	public ResponseEntity<Void> add(@PathVariable(value = "id")	long id, @RequestBody @Valid EditarUsuarioDto dto) {
+	public ResponseEntity<Void> update(@PathVariable(value = "id")	long id, @RequestBody @Valid EditarUsuarioDto dto) {
 		try {
 			this.editarUsuarioService.execute(id, dto);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch(Error err) {
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	@DeleteMapping("/usuario/{id}")
+	@Operation(summary = "edita um usuário", method = "DELETE")
+	@ApiResponse(responseCode = "201")
+	public ResponseEntity<Void> delete(@PathVariable(value = "id")	long id) {
+		try {
+			this.excluirUsuarioService.execute(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch(Error err) {
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
