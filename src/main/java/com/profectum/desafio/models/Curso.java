@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.profectum.desafio.dto.Curso.CriarCursoDto;
+import com.profectum.desafio.dto.Curso.EditarCursoDto;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -41,6 +42,17 @@ public class Curso implements Serializable{
 		super();
 		this.nome = dto.getNome();
 		this.duracaoEmSemestres = dto.getDuracaoEmSemestres();
+	}
+	
+	public Curso update(Curso curso, EditarCursoDto dto) {
+		if (dto.getNome() != null) {
+	        curso.setNome(dto.getNome().get());
+	    }
+
+	    if (dto.getDuracaoEmSemestres() != null) {
+	        curso.setDuracaoEmSemestres(dto.getDuracaoEmSemestres().get());
+	    }
+		return curso;
 	}
 
 	public Curso() {

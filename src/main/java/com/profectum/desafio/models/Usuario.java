@@ -146,9 +146,10 @@ public class Usuario implements Serializable, UserDetails{
 	}
 
 	@Override
+	 @JsonIgnore
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return senha;
 	}
 	
 	
