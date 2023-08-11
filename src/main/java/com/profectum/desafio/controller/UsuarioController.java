@@ -83,7 +83,7 @@ public class UsuarioController {
 	}
 	
 	@PatchMapping("/usuario/{id}")
-	@Operation(summary = "Cria um usuário", method = "POST")
+	@Operation(summary = "edita um usuário", method = "PATCH")
 	@ApiResponse(responseCode = "201")
 	public ResponseEntity<Void> add(@PathVariable(value = "id")	long id, @RequestBody @Valid EditarUsuarioDto dto) {
 		try {

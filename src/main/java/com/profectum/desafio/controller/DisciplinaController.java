@@ -39,21 +39,21 @@ public class DisciplinaController {
 	@Operation(summary = "Cria uma disciplina", method = "POST")
 	@ApiResponse(responseCode = "201")
 	public Disciplina add(@RequestBody  @Valid CriarDisciplinaDto dto) {
-		return criarDisciplinaService.execute(dto);
+		return this.criarDisciplinaService.execute(dto);
 	}
 	
 	@GetMapping("/disciplinas")
 	@Operation(summary = "Lista todas as disciplinas", method = "GET")
 	@ApiResponse(responseCode = "200")
 	public List<Disciplina> findAll(){
-		return listarDisciplinasService.execute();
+		return this.listarDisciplinasService.execute();
 	}
 	
 	@GetMapping("/disciplina/{id}")
 	@Operation(summary = "Lista uma disciplina pelo seu id.", method = "GET")
 	@ApiResponse(responseCode = "200")
 	public Disciplina findById(@PathVariable(value = "id")	long id) {
-		return listarDisciplinaPorId.execute(id);
+		return this.listarDisciplinaPorId.execute(id);
 	}
 	
 }

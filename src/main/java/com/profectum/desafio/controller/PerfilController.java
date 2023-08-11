@@ -41,7 +41,7 @@ public class PerfilController {
 	@ApiResponse(responseCode = "200")
 	public ResponseEntity<List<Perfil>> findAll(){
 		try {
-			return ResponseEntity.ok(listarPerfisService.execute());
+			return ResponseEntity.ok(this.listarPerfisService.execute());
 		} catch(Error err) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -52,7 +52,7 @@ public class PerfilController {
 	@Operation(summary = "Cria um perfil de usário.", method = "POST")
 	public ResponseEntity<Void> add(@RequestBody @Valid CriarPerfilDto dto) {
 		try {
-			criarPerfilService.execute(dto);
+			this.criarPerfilService.execute(dto);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch(Error err) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,7 +65,7 @@ public class PerfilController {
 	@ApiResponse(responseCode = "200")
 	public ResponseEntity<Perfil> findById(@PathVariable(value = "id")	long id) {
 		try {
-			return ResponseEntity.ok(listarPerfilPorIdService.execute(id)) ;
+			return ResponseEntity.ok(this.listarPerfilPorIdService.execute(id)) ;
 		} catch (Error err) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

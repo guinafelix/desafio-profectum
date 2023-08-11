@@ -39,7 +39,7 @@ public class AuthController {
 		try {
 			UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(dto.getNome(), dto.getSenha());
 			Authentication auth = this.authManager.authenticate(usernamePassword);
-			String token = jwtTokenService.generateToken((Usuario) auth.getPrincipal());
+			String token = this.jwtTokenService.generateToken((Usuario) auth.getPrincipal());
 			
 			return ResponseEntity.ok(new LoginResponseDto(token));
 		} catch(Exception err) {

@@ -28,9 +28,9 @@ public class EditarUsuario {
 		
 		if (user == null) return ResponseEntity.notFound().build();
 		
-		if (dto.getMatricula().get() != null)  user.setMatricula(dto.getMatricula().get());
+		if (dto.getMatricula() != null)  user.setMatricula(dto.getMatricula().get());
 		
-		if (dto.getCursoId().get() != null) {
+		if (dto.getCursoId() != null) {
 			Curso curso = cursoRepo.findById(dto.getCursoId().get()).get();
 			if (curso == null) return ResponseEntity.notFound().build();
 			user.setCurso(curso);
@@ -38,7 +38,7 @@ public class EditarUsuario {
 		
 		if (dto.getNome() != null) user.setNome(dto.getNome().get());
 		
-		if (dto.getPerfilId().get() != null) {
+		if (dto.getPerfilId() != null) {
 			Perfil perfil = this.perfilRepo.findById(dto.getPerfilId().get()).get();
 			if (perfil == null) return ResponseEntity.notFound().build();
 			user.setPerfil(perfil);
