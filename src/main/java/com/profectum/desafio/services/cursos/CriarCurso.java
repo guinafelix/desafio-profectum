@@ -21,22 +21,22 @@ public class CriarCurso {
 	@Autowired
 	CriarOferta criarOfertaService;
 	
-	public Curso execute(CriarCursoDto dto) {
+	public void execute(CriarCursoDto dto) {
 		Curso curso = new Curso(dto);
 		
 		List<Oferta> ofertas = new ArrayList<>();
 		
 		List<CriarOfertaDto> listaDeOfertas = dto.getofertas();
 		
-		Curso savedCurso = cursoRepository.save(curso);
+		Curso updatedCurso = cursoRepository.save(curso);
 
 		for (CriarOfertaDto criarOfertaDto : listaDeOfertas) {
-		    Oferta oferta = criarOfertaService.execute(criarOfertaDto, savedCurso); 
+		    Oferta oferta = criarOfertaService.execute(criarOfertaDto, updatedCurso); 
 		    ofertas.add(oferta);
 		}
 		
-		savedCurso.setOfertas(ofertas);
+		updatedCurso.setOfertas(ofertas);
 		
-		return cursoRepository.save(savedCurso);
+		curso = cursoRepository.save(updatedCurso);
 	}
 }

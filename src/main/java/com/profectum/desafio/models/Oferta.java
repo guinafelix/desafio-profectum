@@ -3,6 +3,9 @@ package com.profectum.desafio.models;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +27,7 @@ public class Oferta implements Serializable{
 	
 	private int semestre;
     
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "oferta_disciplina",
         joinColumns = @JoinColumn(name = "oferta_id"),
@@ -66,6 +69,15 @@ public class Oferta implements Serializable{
 
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
+	}
+
+	@JsonIgnore
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	public void setDisciplinas(List<Disciplina> disciplinas) {

@@ -60,11 +60,11 @@ public class CursoController {
 	@ApiResponse(responseCode = "200")
 	public ResponseEntity<List<Curso>> findAll(){
 		try {
-			return ResponseEntity.ok(listarCursosService.execute());
+			return ResponseEntity.ok(this.listarCursosService.execute()); 
 		} catch (Error err) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			System.out.println(err);
 		}
-		
+		return null;
 	}
 	
 	@PatchMapping("/curso/{id}")
