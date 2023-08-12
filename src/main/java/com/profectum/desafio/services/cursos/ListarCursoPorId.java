@@ -1,6 +1,6 @@
 package com.profectum.desafio.services.cursos;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class ListarCursoPorId {
 	@Autowired
 	CursoRepository cursoRepository;
 	
-	public List<Curso> execute(){
-		return cursoRepository.findAll();
+	public Optional<Curso> execute(Long id){
+		return cursoRepository.findById(id);
 	}
 }

@@ -1,11 +1,11 @@
 package com.profectum.desafio.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +44,9 @@ public class CursoController {
 	@Autowired
 	EditarCurso editarCursoService;
 	
+	@Autowired
+	ListarCursoPorId listarCursoPorIdService;
+	
 	@PostMapping("/curso")
 	@Operation(summary = "Cria um curso.", method = "POST")
 	@ApiResponse(responseCode = "201")
@@ -62,6 +65,18 @@ public class CursoController {
 	public ResponseEntity<List<Curso>> findAll(){
 		try {
 			return ResponseEntity.ok(this.listarCursosService.execute()); 
+		} catch (Error err) {
+			System.out.println(err);
+		}
+		return null;
+	}
+	
+	@GetMapping("/curso/{id}")
+	@Operation(summary = "Lista todos os usuários", method = "GET")
+	@ApiResponse(responseCode = "200")
+	public ResponseEntity<Optional<Curso>> findById(@PathVariable(value = "id")	long id){
+		try {
+			return ResponseEntity.ok(this.listarCursoPorIdService.execute(id)); 
 		} catch (Error err) {
 			System.out.println(err);
 		}
