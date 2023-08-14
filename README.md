@@ -63,6 +63,14 @@ Subindo o banco postgres
   docker compose -f composer-postgres.yml up -d
 ```
 
+```bash
+docker exec -it postgres bash
+```
+
+```bash
+psql -U <usuario> -d des_profectum -f dump.sql
+```
+
 Instale as dependências
 
 ```bash
