@@ -1,5 +1,7 @@
 package com.profectum.desafio.services.usuarios;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,24 +28,35 @@ public class EditarUsuario {
 	public ResponseEntity<Void> execute(Long id, EditarUsuarioDto dto) {
 		Usuario user = this.userRepo.findById(id).get();
 		
-		if (user == null) return ResponseEntity.notFound().build();
-		
-		if (dto.getMatricula() != null)  user.setMatricula(dto.getMatricula().get());
-		
-		if (dto.getCursoId() != null) {
-			Curso curso = cursoRepo.findById(dto.getCursoId().get()).get();
-			if (curso == null) return ResponseEntity.notFound().build();
-			user.setCurso(curso);
+		if (user == null) {
+		    return ResponseEntity.notFound().build();
 		}
-		
-		if (dto.getNome() != null) user.setNome(dto.getNome().get());
-		
-		if (dto.getPerfilId() != null) {
-			Perfil perfil = this.perfilRepo.findById(dto.getPerfilId().get()).get();
-			if (perfil == null) return ResponseEntity.notFound().build();
-			user.setPerfil(perfil);
+
+		if (dto.getMatricula().isPresent()) {
+		    user.setMatricula(dto.getMatricula().get());
 		}
-		this.userRepo.save(user);
+
+		if (dto.getCursoId().isPresent()) {
+		    Optional<Curso> cursoOptional = cursoRepo.findById(dto.getCursoId().get());
+		    if (!cursoOptional.isPresent()) {
+		        return ResponseEntity.notFound().build();
+		    }
+		    user.setCurso(cursoOptional.get());
+		}
+
+		if (dto.getNome().isPresent()) {
+		    user.setNome(dto.getNome().get());
+		}
+
+		if (dto.getPerfilId().isPresent()) {
+		    Optional<Perfil> perfilOptional = perfilRepo.findById(dto.getPerfilId().get());
+		    if (!perfilOptional.isPresent()) {
+		        return ResponseEntity.notFound().build();
+		    }
+		    user.setPerfil(perfilOptional.get());
+		}
+
+		userRepo.save(user);
 		return ResponseEntity.noContent().build();
 	}
 }
