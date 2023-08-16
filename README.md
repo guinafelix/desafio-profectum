@@ -71,6 +71,13 @@ Subindo o banco postgres
   psql -U <usuario> -d des_profectum -f dump.sql
 ```
 
+Após realizar o dump do banco o usuário admin terá as credenciais
+```bash
+  nome: admin
+  senha: admin	
+```
+
+
 Instale as dependências
 
 ```bash
